@@ -1,0 +1,12 @@
+C:\Users\admin\source\repos\SocketProgramming\Client\bin\Debug\Client.exe.config
+C:\Users\admin\source\repos\SocketProgramming\Client\bin\Debug\Client.exe
+C:\Users\admin\source\repos\SocketProgramming\Client\bin\Debug\Client.pdb
+C:\Users\admin\source\repos\SocketProgramming\Client\obj\Debug\Client.csproj.AssemblyReference.cache
+C:\Users\admin\source\repos\SocketProgramming\Client\obj\Debug\Client.clientForm.resources
+C:\Users\admin\source\repos\SocketProgramming\Client\obj\Debug\Client.Properties.Resources.resources
+C:\Users\admin\source\repos\SocketProgramming\Client\obj\Debug\Client.csproj.GenerateResource.cache
+C:\Users\admin\source\repos\SocketProgramming\Client\obj\Debug\Client.csproj.CoreCompileInputs.cache
+C:\Users\admin\source\repos\SocketProgramming\Client\obj\Debug\Client.exe
+C:\Users\admin\source\repos\SocketProgramming\Client\obj\Debug\Client.pdb
+C:\Users\admin\source\repos\SocketProgramming\Client\obj\Debug\Client.ManyObj.resources
+C:\Users\admin\source\repos\SocketProgramming\Client\obj\Debug\Client.OneObj.resources

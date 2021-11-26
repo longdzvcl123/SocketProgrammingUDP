@@ -15,6 +15,7 @@ namespace Client
         private const int bufSize = 8 * 1024;
         private State state = new State();
         private EndPoint epFrom = new IPEndPoint(IPAddress.Any, 0);
+        private IPEndPoint serverEndPoint;
         private AsyncCallback recv = null;
 
         public class State
@@ -24,7 +25,8 @@ namespace Client
         public Client(IPAddress _ip, int port)
         {
             socketClient = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-            socketClient.Connect(_ip, port);
+            socketClient.Connect(new IPEndPoint(_ip, port));
+            serverEndPoint = new IPEndPoint(_ip, port);
             Receive();
         }
         private void Receive()
@@ -41,9 +43,13 @@ namespace Client
                     Array.Copy(state.buffer, req, bytes);
 
                     //xu li data
-                    string str = Encoding.UTF8.GetString(req);
-                    if (str == "test")
-                        MessageBox.Show("Longdz");
+                    //string str = Encoding.UTF8.GetString(req);
+                    //if (str == "test")
+                    //{
+                    //    Send("test");
+                    //    MessageBox.Show("Longdz");
+                        
+                    //}
 
                     Array.Clear(state.buffer, 0, bufSize);
 
@@ -58,12 +64,7 @@ namespace Client
         public void Send(string text)
         {
             byte[] data = Encoding.ASCII.GetBytes(text);
-            socketClient.BeginSend(data, 0, data.Length, SocketFlags.None, (ar) =>
-            {
-                State so = (State)ar.AsyncState;
-                int bytes = socketClient.EndSend(ar);
-               
-            }, state);
+            socketClient.SendTo(data, serverEndPoint);
         }
     }
 }

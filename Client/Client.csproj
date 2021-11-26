@@ -53,10 +53,28 @@
     <Compile Include="ClientForm.Designer.cs">
       <DependentUpon>ClientForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ManyObj.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ManyObj.Designer.cs">
+      <DependentUpon>ManyObj.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OneObj.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OneObj.Designer.cs">
+      <DependentUpon>OneObj.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="ClientForm.resx">
       <DependentUpon>ClientForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ManyObj.resx">
+      <DependentUpon>ManyObj.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OneObj.resx">
+      <DependentUpon>OneObj.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
