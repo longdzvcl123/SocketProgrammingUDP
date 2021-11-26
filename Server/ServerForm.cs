@@ -17,7 +17,7 @@ namespace Server
         private Socket socketServer;
         private const int bufSize = 20 * 1024;
         private State state = new State();
-        private EndPoint epFrom = new IPEndPoint(IPAddress.Any, 0); //
+        private EndPoint epFrom = new IPEndPoint(IPAddress.Any, 0); //abc
         private AsyncCallback recv = null;
         public string request;
         //private List<EndPoint> ClientSockets;  // EndPoint : IP-Port
