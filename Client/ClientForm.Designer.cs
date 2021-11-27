@@ -36,6 +36,10 @@ namespace Client
             this.ipBox = new System.Windows.Forms.TextBox();
             this.connectServer = new System.Windows.Forms.Button();
             this.disconnectServer = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.ordinalNumber = new System.Windows.Forms.TextBox();
+            this.displayAll = new System.Windows.Forms.Button();
+            this.searchData = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // checkBox1
@@ -107,6 +111,7 @@ namespace Client
             this.connectServer.TabStop = false;
             this.connectServer.Text = "Connection";
             this.connectServer.UseVisualStyleBackColor = true;
+            this.connectServer.Click += new System.EventHandler(this.connectServer_Click);
             // 
             // disconnectServer
             // 
@@ -118,13 +123,65 @@ namespace Client
             this.disconnectServer.TabStop = false;
             this.disconnectServer.Text = "Disconnection";
             this.disconnectServer.UseVisualStyleBackColor = true;
+            this.disconnectServer.Click += new System.EventHandler(this.disconnectServer_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(12, 120);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(59, 16);
+            this.label3.TabIndex = 14;
+            this.label3.Text = "Request";
+            // 
+            // ordinalNumber
+            // 
+            this.ordinalNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ordinalNumber.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.ordinalNumber.Location = new System.Drawing.Point(418, 137);
+            this.ordinalNumber.Name = "ordinalNumber";
+            this.ordinalNumber.Size = new System.Drawing.Size(312, 24);
+            this.ordinalNumber.TabIndex = 15;
+            this.ordinalNumber.TabStop = false;
+            this.ordinalNumber.Text = "Enter ordinal number";
+            this.ordinalNumber.Click += new System.EventHandler(this.ordinalNumber_Click);
+            this.ordinalNumber.Leave += new System.EventHandler(this.ordinalNumber_Leave);
+            // 
+            // displayAll
+            // 
+            this.displayAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.displayAll.Location = new System.Drawing.Point(71, 134);
+            this.displayAll.Name = "displayAll";
+            this.displayAll.Size = new System.Drawing.Size(161, 29);
+            this.displayAll.TabIndex = 16;
+            this.displayAll.TabStop = false;
+            this.displayAll.Text = "Display all locations";
+            this.displayAll.UseVisualStyleBackColor = true;
+            this.displayAll.Click += new System.EventHandler(this.displayAll_Click);
+            // 
+            // searchData
+            // 
+            this.searchData.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchData.Location = new System.Drawing.Point(251, 134);
+            this.searchData.Name = "searchData";
+            this.searchData.Size = new System.Drawing.Size(161, 29);
+            this.searchData.TabIndex = 17;
+            this.searchData.TabStop = false;
+            this.searchData.Text = "Search";
+            this.searchData.UseVisualStyleBackColor = true;
+            this.searchData.Click += new System.EventHandler(this.search_Click);
             // 
             // clientForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(743, 105);
+            this.ClientSize = new System.Drawing.Size(743, 221);
+            this.Controls.Add(this.searchData);
+            this.Controls.Add(this.displayAll);
+            this.Controls.Add(this.ordinalNumber);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.disconnectServer);
             this.Controls.Add(this.connectServer);
             this.Controls.Add(this.checkBox1);
@@ -148,6 +205,10 @@ namespace Client
         private System.Windows.Forms.TextBox ipBox;
         private System.Windows.Forms.Button connectServer;
         private System.Windows.Forms.Button disconnectServer;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox ordinalNumber;
+        private System.Windows.Forms.Button displayAll;
+        private System.Windows.Forms.Button searchData;
     }
 }
 

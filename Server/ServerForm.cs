@@ -11,13 +11,13 @@ using System.Net;
 using System.Net.Sockets;
 
 namespace Server
-{
+{ 
     public partial class serverForm : Form
-    {
+    {        
         private Socket socketServer;
         private const int bufSize = 20 * 1024;
         private State state = new State();
-        private EndPoint epFrom = new IPEndPoint(IPAddress.Any, 0); //abc
+        private EndPoint epFrom = new IPEndPoint(IPAddress.Any, 0); 
         private AsyncCallback recv = null;
         public string request;
         //private List<EndPoint> ClientSockets;  // EndPoint : IP-Port
@@ -50,6 +50,7 @@ namespace Server
                     Array.Copy(state.buffer, req, bytes);
 
                     request = Encoding.UTF8.GetString(req);
+                    if (request == "Connection...") sendDataTo("Agree to connect");
 
                     this.Invoke(new MethodInvoker(delegate
                     {
@@ -127,12 +128,25 @@ namespace Server
         }
         private void stopConnect_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Do you want to stop the connection?", "Exit",
+            try
+            {
+                DialogResult result = MessageBox.Show("Do you want to stop the connection?", "Norify",
                 MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
 
-            socketServer.Close();
-            if (result == DialogResult.Yes)
-                this.Close();
+                if (result == DialogResult.Yes)
+                {
+                    sendDataTo("Disconnection");
+                    this.Invoke(new MethodInvoker(delegate
+                    {
+                        richTextBox1.Text += "\nDisconnection...";
+                    }));
+
+                    ipBox.Text = "Enter IP"; ipBox.ForeColor = Color.Gray;
+                    portBox.Text = "Enter port"; portBox.ForeColor = Color.Gray;
+                    checkBox1 = new CheckBox();
+                }
+            }
+            catch { }
         }
     }
 }
