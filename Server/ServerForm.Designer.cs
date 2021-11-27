@@ -117,6 +117,7 @@ namespace Server
             this.stopConnect.Name = "stopConnect";
             this.stopConnect.Size = new System.Drawing.Size(75, 33);
             this.stopConnect.TabIndex = 7;
+            this.stopConnect.TabStop = false;
             this.stopConnect.Text = "Stop";
             this.stopConnect.UseVisualStyleBackColor = true;
             this.stopConnect.Click += new System.EventHandler(this.stopConnect_Click);
