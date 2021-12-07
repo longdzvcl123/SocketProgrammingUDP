@@ -9,17 +9,25 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net;
 using System.Net.Sockets;
+using System.Threading;
 
 namespace Client
 {
     public partial class clientForm : Form
     {
-        public Socket socketClient;                                         //Socket of client
-        private const int bufSize = 8 * 1024;                               //Size of buffer
-        private State state = new State();                                  //class initialize buffer
-        private EndPoint epFrom = new IPEndPoint(IPAddress.Any, 0);         //IP and Port from 
+        public static Socket socketClient;                                  //Socket cua client
+        private const int bufSize = 70000;                                  //Kich thuoc cua buffer
+        private State state = new State();                                  //class khoi tao buffer
+        private EndPoint epFrom = new IPEndPoint(IPAddress.Any, 0);         //Khoi tao bien chua Ip-Port 
         private AsyncCallback recv = null;
-        public static string data;                                          //Data from server
+        public static string IpServer;                                      //Ip cua server da ket noi
+        public static string portServer;                                    //Port cuar server da ket noi
+        public static OneObj Obj = new OneObj();                            //Khoi tao form cua mot dia diem
+        public static ManyObj Objs = new ManyObj();                         //Khoi tao form cua nhieu dia diem
+        public static FormImage img = new FormImage();                      //Khoi tao form cua cac hinh anh
+        public static string data1;                                         //Data nhan tu server (kieu chuoi)
+        public static byte[] data2;                                         //Data nhan tu server (kieu Byte)
+        public static string idData = null;
         public clientForm()
         {
             InitializeComponent();
@@ -38,17 +46,18 @@ namespace Client
                     int bytes = socketClient.EndReceiveFrom(ar, ref epFrom);
                     socketClient.BeginReceiveFrom(so.buffer, 0, bufSize, SocketFlags.None, ref epFrom, recv, so);
 
+                    //Xu ly du lieu nhan
                     byte[] req = new byte[bytes];
                     Array.Copy(state.buffer, req, bytes);
 
-                    data = Encoding.UTF8.GetString(req);
+                    data1 = Encoding.UTF8.GetString(req);
+                    data2 = req;
 
-                    if (data == "Disconnection")
+                    if (data1 == "Disconnection")
                         disconnectFromServer();
 
-                    if (data == "Agree to connect")
-                        MessageBox.Show("Connection complete!", "Notify", MessageBoxButtons.OK);
-
+                    if (data1 == "Agree to connect")
+                        MessageBox.Show("Connection complete!", "Notification from client", MessageBoxButtons.OK, MessageBoxIcon.Question);
                     Array.Clear(state.buffer, 0, bufSize);
 
                 }
@@ -59,6 +68,7 @@ namespace Client
 
             }, state);
         }
+
         public void sendRequest(string text)
         {
             byte[] data = Encoding.ASCII.GetBytes(text);
@@ -68,19 +78,26 @@ namespace Client
         {
             try
             {
-                DialogResult res = MessageBox.Show("  Server has been disconnected!!!\nDo you want to close client?", "Notify"
+                DialogResult res = MessageBox.Show("Server has been disconnected!!!\nDo you want to close client?", "Notification from client"
                     , MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 if (res == DialogResult.Yes) this.Close();
-
+                setFromClear();
                 socketClient.Shutdown(SocketShutdown.Both);
                 socketClient.Disconnect(true);
 
             }
             catch { }
         }
+        private void setFromClear()
+        {
+            checkBox1.Checked = false;
+            ipBox.Text = "Enter IP";                            ipBox.ForeColor = Color.Gray;
+            portBox.Text = "Enter port";                        portBox.ForeColor = Color.Gray;
+            ordinalNumber.Text = "Enter ordinal number (1-10)"; ordinalNumber.ForeColor = Color.Gray;
+        }
 
-        //Xu li Toolbox tu Form
+        //Xu li Toolbox cua Form
         private void ipBox_Click(object sender, EventArgs e)
         {
             if (ipBox.Text != "Enter IP") return;
@@ -124,6 +141,19 @@ namespace Client
             }
         }
 
+        private void ordinalNumber_Click(object sender, EventArgs e)
+        {
+            if (ordinalNumber.Text != "Enter ordinal number (1-10)") return;
+            ordinalNumber.Text = "";
+            ordinalNumber.ForeColor = Color.Black;
+        }
+
+        private void ordinalNumber_Leave(object sender, EventArgs e)
+        {
+            if (ordinalNumber.Text != "") return;
+            ordinalNumber.Text = "Enter ordinal number (1-10)";
+            ordinalNumber.ForeColor = Color.Gray;
+        }
         private void connectServer_Click(object sender, EventArgs e)
         {
             try
@@ -132,11 +162,13 @@ namespace Client
                 socketClient.Connect(new IPEndPoint(IPAddress.Parse(ipBox.Text), Int32.Parse(portBox.Text)));
                 epFrom = new IPEndPoint(IPAddress.Parse(ipBox.Text), Int32.Parse(portBox.Text));
 
+                IpServer = ipBox.Text; portServer = portBox.Text;
+
                 receiveData();
                 sendRequest("Connection...");
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -146,15 +178,20 @@ namespace Client
         {
             try
             {
-                DialogResult res = MessageBox.Show("  Disconnect from the server!!!\nDo you want to close client?", "Notify"
+                DialogResult res = MessageBox.Show("Do you want to disconnect from the server?", "Notification from client"
                   , MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                if (res == DialogResult.Yes) this.Close();
+                if (res == DialogResult.Yes)
+                {
+                    this.Close();
+                    sendRequest("Disconnection!!!");
 
-                sendRequest("Disconnection!!!");
+                    setFromClear();
 
-                socketClient.Shutdown(SocketShutdown.Both);
-                socketClient.Disconnect(true);
+                    socketClient.Shutdown(SocketShutdown.Both);
+                    socketClient.Disconnect(true);
+                }
+                else return;
             }
             catch { }
         }
@@ -163,55 +200,55 @@ namespace Client
         {
             try
             {
-                ManyObj Objs = new ManyObj();
                 sendRequest("Send all locations");
-                Objs.Show();
+                string dataBef = data1;
+                while (true)
+                {
+                    if (data1 != dataBef)
+                        break;
+                }
+                Objs.ShowDialog();
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         private void search_Click(object sender, EventArgs e)
         {
             try
             {
-                OneObj Obj = new OneObj();
-                if (ordinalNumber.Text != "Enter ordinal number")
+                int num = Int32.Parse(ordinalNumber.Text);
+
+                if (ordinalNumber.Text != "Enter ordinal number (1-10)" && num > 0 && num <= 10)
                 {
-                    sendRequest(ordinalNumber.Text);
-                    if (data == "No data!!!") 
+                    sendRequest(num.ToString());
+                    if (data1 == "No data!!!")
                     {
                         MessageBox.Show("The server does not have this data !", "No data", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-                    else {
-                        Obj.Show();
+                    else
+                    {
+                        idData = num.ToString();
+                        string dataBef = data1;
+                        while (true)
+                        {
+                            if (data1 != dataBef)
+                                break;
+                        }
+                        Obj.ShowDialog();
                     }
                 }
                 else
                 {
-                    MessageBox.Show("You have not entered the request!!!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("You have not entered the request or Incorrect request!!!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void ordinalNumber_Click(object sender, EventArgs e)
-        {
-            if (ordinalNumber.Text != "Enter ordinal number") return;
-            ordinalNumber.Text = "";
-            ordinalNumber.ForeColor = Color.Black;
-        }
-
-        private void ordinalNumber_Leave(object sender, EventArgs e)
-        {
-            if (ordinalNumber.Text != "") return;
-            ordinalNumber.Text = "Enter ordinal number";
-            ordinalNumber.ForeColor = Color.Gray;
         }
     }
 }

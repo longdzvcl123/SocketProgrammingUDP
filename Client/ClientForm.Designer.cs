@@ -144,7 +144,7 @@ namespace Client
             this.ordinalNumber.Size = new System.Drawing.Size(312, 24);
             this.ordinalNumber.TabIndex = 15;
             this.ordinalNumber.TabStop = false;
-            this.ordinalNumber.Text = "Enter ordinal number";
+            this.ordinalNumber.Text = "Enter ordinal number (1-10)";
             this.ordinalNumber.Click += new System.EventHandler(this.ordinalNumber_Click);
             this.ordinalNumber.Leave += new System.EventHandler(this.ordinalNumber_Leave);
             // 
