@@ -38,6 +38,7 @@ namespace Client
             this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.richTextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.richTextBox1.Location = new System.Drawing.Point(13, 13);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(790, 422);
@@ -56,6 +57,7 @@ namespace Client
             this.button1.TabStop = false;
             this.button1.Text = "Close";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // ManyObj
             // 
@@ -66,6 +68,7 @@ namespace Client
             this.Controls.Add(this.richTextBox1);
             this.Name = "ManyObj";
             this.Text = "Display information of multiple locations";
+            this.Load += new System.EventHandler(this.ManyObj_Load);
             this.ResumeLayout(false);
 
         }

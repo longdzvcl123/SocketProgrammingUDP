@@ -1,0 +1,93 @@
+{
+  "1": {
+    "name": "Dinh Doc Lap",
+    "longitude": "106 41' 46.8\"",
+    "latitude": "10 46' 41.85\"",
+    "allegory": " Khu di tich nam o so 135 Nam Ky Khoi Nghia, phuong Ben Thanh, Quan 1, thanh pho Ho Chi Minh, duoc xep hang la di tich quoc gia dac biet",
+    "image1": "1_1.jpg",
+    "image2": "1_2.jpg",
+    "image3": "1_3.jfif"
+  },
+  "2": {
+    "name": "Khue Van Cac",
+    "longitude": "105 50' 9.09\"",
+    "latitude": "21 1' 43.63\"",
+    "allegory": "Khu di tich nam o phuong Ton Duc Thang, Van Mieu, Dong Da, Ha Noi, la noi bao ton bia tien si thoi xua ",
+    "image1": "2_1.jpg",
+    "image2": "2_2.jpg",
+    "image3": "2_3.jpg"
+  },
+  "3": {
+    "name": "Ngo Mon",
+    "longitude": "107 34' 45.12\"",
+    "latitude": "16 28' 3.75\"",
+    "allegory": "Khu di tich nam o FH9H+3M3, Phu Hau, thanh pho Hue, Thua Thien Hue, la bieu tuong cho kien truc dinh cao cua Thua Thien Hue",
+    "image1": "3_1.jpg",
+    "image2": "3_2.jpg",
+    "image3": "3_3.jpg"
+  },
+  "4": {
+    "name": "Toa nha Bitexco",
+    "longitude": "106 42' 20.66\"",
+    "latitude": "10 46' 20.2\"",
+    "allegory": "Toa nha nay nam o di chi so 19-25 Nguyen Hue , Phuong Ben Nghe, Quan 1, Thanh pho Ho Chi Minh la bieu tuong cho su hien dai cua thanh pho Ho Chi Minh",
+    "image1": "4_1.jpg",
+    "image2": "4_2.jpg",
+    "image3": "4_3.jpg"
+  },
+
+  "5": {
+    "name": "Dia Dao Cu Chi",
+    "longitude": "106 27' 44.07\"",
+    "latitude": "11 8' 38.13\"",
+    "allegory": "Khu di tich nam o D. Tinh Lo 15, Phu Hiep, Thanh pho Ho Chi Minh, la mot he thong phong thu dinh cao.",
+    "image1": "5_1.jpg",
+    "image2": "5_2.jpg",
+    "image3": "5_3.jpg"
+  },
+  "6": {
+    "name": "Thanh co Quang Tri",
+    "longitude": "107 11' 23.63\"",
+    "latitude": "16 45' 14.73\"",
+    "allegory": "Khu di tich nam o Nguyen Tri Phuong, Phuong 2, Quang Tri la mot ban trang ca hao hung 81 ngay dem",
+    "image1": "6_1.jpg",
+    "image2": "6_2.jpg",
+    "image3": "6_3.jpg"
+  },
+  "7": {
+    "name": "Dinh nui Phan-xi-pang",
+    "longitude": "103 46' 39.72\"",
+    "latitude": "22 18' 35.36\"",
+    "allegory": "Dinh nui Phan-xi-pang toa lac day nui Hoang Lien Son, dinh nui cao nhat o Viet Nam voi do cao 3143m",
+    "image1": "7_1.jpg",
+    "image2": "7_2.jpg",
+    "image3": "7_3.jpg"
+  },
+  "8": {
+    "name": "Chua Thien Mu",
+    "longitude": "107.5,107 32' 41.63\"",
+    "latitude": "16 27' 12.02\"",
+    "allegory": "La mot ngoi chua co nam tren doi Ha Khe, ta ngan song Huong, cach trung tam thanh pho Hue 5km ve phia tay, duoc menh danh la ngoi chua thieng lieng bac nhat xu Hue",
+    "image1": "8_1.jpg",
+    "image2": "8_2.jpg",
+    "image3": "8_3.jpg"
+  },
+  "9": {
+    "name": "Dong Phong Nha",
+    "longitude": "106 16' 55.86\"",
+    "latitude": "17 34' 56.31\"",
+    "allegory": "thuoc Vuong Quoc Gia Phong Nha Ke Bang, tinh Quang Binh, la ve dep cua mot ky quan de nhat dong",
+    "image1": "9_1.jpg",
+    "image2": "9_2.jpg",
+    "image3": "9_3.jpg"
+  },
+  "10": {
+    "name": "Nha tu Con Dao",
+    "longitude": "106 36' 53.29\"",
+    "latitude": "9 41' 21.04\"",
+    "allegory": "thuoc ngoai vung Ba Ria- Vung Tau duoc xay dung tu nam 1862 va no duoc menh danh la dia nguc tran gian",
+    "image1": "10_1.jpg",
+    "image2": "10_2.jpg",
+    "image3": "10_3.jpg"
+  }
+}
