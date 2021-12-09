@@ -15,7 +15,7 @@ namespace Client
 {
     public partial class clientForm : Form
     {
-        public static Socket socketClient;                                  //Socket cua client
+        public static Socket socketClient = null;                           //Socket cua client
         private const int bufSize = 70000;                                  //Kich thuoc cua buffer
         private State state = new State();                                  //class khoi tao buffer
         private EndPoint epFrom = new IPEndPoint(IPAddress.Any, 0);         //Khoi tao bien chua Ip-Port 
@@ -27,7 +27,7 @@ namespace Client
         public static FormImage img = new FormImage();                      //Khoi tao form cua cac hinh anh
         public static string data1;                                         //Data nhan tu server (kieu chuoi)
         public static byte[] data2;                                         //Data nhan tu server (kieu Byte)
-        public static string idData = null;
+        public static string idData = null;                                 //Id cua dia diem
         public clientForm()
         {
             InitializeComponent();

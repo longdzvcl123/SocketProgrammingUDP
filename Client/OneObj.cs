@@ -58,7 +58,6 @@ namespace Client
             richTextBox1.Text = "Id: " + id + "\nName: " + name + "\nLocation:\n-Latitude: " +
                 latitude + "\n-Longtitude: " + longtitude + "\nAllegory: " + allegory + "\n";
 
-            sendRequest(clientForm.idData + "Send image1");
             }
 
         private void button1_Click(object sender, EventArgs e)

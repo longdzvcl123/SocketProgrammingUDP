@@ -23,6 +23,9 @@ namespace Client
 
         private void FormImage_Load(object sender, EventArgs e)
         {
+            string dataBefor = clientForm.data1;
+            sendRequest(clientForm.idData + "Send image1");
+            while (clientForm.data1 == dataBefor) ;
             int n = 0;
             while (true)
             {
@@ -38,6 +41,7 @@ namespace Client
                     sendRequest(clientForm.idData + "Send image3");
                 else
                     sendRequest("Receive complete!!!");
+
                 while (b == clientForm.data2) ;
 
                 if (clientForm.data1 == "Send complete!!!") break;
