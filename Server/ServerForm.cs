@@ -46,21 +46,24 @@ namespace Server
                 try
                 {
                     State so = (State)ar.AsyncState;
-                    int bytes = socketServer.EndReceiveFrom(ar, ref epFrom);
+                    int bytes = socketServer.EndReceiveFrom(ar, ref epFrom);// So byte nhan duoc tu client
                     socketServer.BeginReceiveFrom(so.buffer, 0, bufSize, SocketFlags.None, ref epFrom, recv, so);
 
                     //Xu li du lieu nhan
                     byte[] req = new byte[bytes];
-                    Array.Copy(state.buffer, req, bytes);
+                    Array.Copy(state.buffer, req, bytes); //Lay yeu cau voi so byte nhan dc
 
                     request = Encoding.UTF8.GetString(req);
+
                     if (request == "Connection...")
                     {
+                        //Them client vao list
                         listClient.Add(epFrom);
                         sendDataTo("Agree to connect");
                     }
                     else if (request == "Disconnection!!!")
                     {
+                        //Xoa client ra khoi list
                         listClient.Remove(epFrom);
                         sendDataTo("Complete disconnection!!!");
                     }
@@ -70,24 +73,30 @@ namespace Server
                     }
                     else if (request == "Send all locations")
                     {
+                        //Lay thong tin tat ca cac dia diem
                         string data = takeManyObjs();
                         sendDataTo(data);
                     }
                     else if (request.Contains("Send image"))
                     {
+                        //Lay id cua dia diem
                         string idData = request.Substring(0, 1);
                         if (request[1] == '0')
                         {
                             idData += '0';
                         }
                         string numImage = request.Replace(idData + "Send ", "");
+
+                        //Gui anh cua dia diem client can 
                         sendImage(idData, numImage);
-                        request = request.Substring(idData.Length - 1);
                     }
                     else
                     {
+                        //Gui thong tin cua 1 dia diem
                         sendOneObj(request);
                     }
+
+                    //Hien thi cac yeu cau cua cac client
                     this.Invoke(new MethodInvoker(delegate
                     {
                         richTextBox1.Text += "\nRequest from " + epFrom.ToString() + ": " + request;
@@ -99,10 +108,11 @@ namespace Server
 
             }, state);
         }
-        private void sendImage(string n, string numImage)
+        private void sendImage(string id, string numImage)
         {
             dynamic readJson = JsonConvert.DeserializeObject(File.ReadAllText("Data.json"));
-            string nameImage = readJson[n][numImage];
+
+            string nameImage = readJson[id][numImage];
 
             MemoryStream ms = new MemoryStream();
             Bitmap bmp = new Bitmap(nameImage);
@@ -195,7 +205,7 @@ namespace Server
                 socketServer.Bind(new IPEndPoint(IPAddress.Parse(ipBox.Text), Int32.Parse(portBox.Text)));
 
                 receiveRequest();
-                richTextBox1.Text += "\nServer listening!!!\n";
+                richTextBox1.Text = "\nServer listening!!!\n";
             }
             catch (Exception ex)
             {
@@ -212,11 +222,13 @@ namespace Server
                 if (result == DialogResult.Yes)
                 {
                     string text = "Disconnection";
+                    //Gui yeu cau ngat ket noi cho tat ca cac client
                     for(int i = 0; i < listClient.Count; i++)
                     {
                         byte[] data = Encoding.ASCII.GetBytes(text);
                         socketServer.SendTo(data, listClient[i]);
                     }
+
                     this.Invoke(new MethodInvoker(delegate
                     {
                         richTextBox1.Text += "\nDisconnection...";
